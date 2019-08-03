@@ -1,8 +1,9 @@
-import { CREATE_COMPANY, DASHBOARD_TOGGLE } from "../constants/actionTypes";
+import { CREATE_COMPANY, DASHBOARD_TOGGLE, FORM_TOGGLE } from "../constants/actionTypes";
 
 const initialState = {
   companyName: [],
   dashboardModalStatus: false,
+  shareholderFormModalToggle: true,
 };
 function rootReducer(state = initialState, action) {
 
@@ -15,6 +16,12 @@ function rootReducer(state = initialState, action) {
   if (action.type === DASHBOARD_TOGGLE) {
     return Object.assign({}, state, {
       dashboardModalStatus: true
+    });
+  }
+
+  if (action.type === FORM_TOGGLE) {
+    return Object.assign({}, state, {
+      shareholderFormModalToggle: false
     });
   }
 

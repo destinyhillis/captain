@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {  } from "../actions/actions";
+import { shareholderFormToggle } from "../actions/actions";
 
 function mapDispatchToProps(dispatch) {
   return {
-    // createCompany: name => dispatch(createCompany(name)),
+    shareholderFormToggle: status => dispatch(shareholderFormToggle(status)),
   };
 }
 
@@ -12,7 +12,6 @@ class ConnectedShareholderForm extends Component {
   constructor() {
     super();
     this.state = {
-      shareholderFormModalToggle: true,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,8 +21,8 @@ class ConnectedShareholderForm extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    this.props.createCompany(this.state.companyName);
-    this.props.dashboardModalToggle();
+    // this.props.createCompany(this.state.companyName);
+    this.props.shareholderFormToggle();
   }
   render() {
     console.log(this.state)
@@ -37,10 +36,29 @@ class ConnectedShareholderForm extends Component {
             onChange={ this.handleChange }
           />
           <h3>Shareholder type:</h3>
-          Dropdown (investors, founders, employees)
+            <select>
+              <option value="investor">Investor</option>
+              <option value="founder">Founder</option>
+              <option value="employee">Employee</option>
+            </select>
           <h3>Amount of Stock Owned</h3>
+            <input
+              type="text"
+              id="stock"
+              onChange={ this.handleChange }
+            />
           <h3>Per Share Value</h3>
+            <input
+              type="text"
+              id="perShare"
+              onChange={ this.handleChange }
+            />
           <h3>Date Given:</h3>
+            <input
+              type="text"
+              id="date"
+              onChange={ this.handleChange }
+            />
         </div>
         <button type="submit">
           Sign Up

@@ -1,10 +1,19 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
 import OnboardingContainer from "./OnboardingContainer";
+import DashboardContainer from "./DashboardContainer";
 
+
+const mapStateToProps = (state) => {
+  return { 
+    // dashboardModalStatus: state.dashboardModalStatus,
+  };
+};
 
 function App(){
 
   const [ctaClickStatus, setCtaClickStatus] = useState(false)
+
 
   const ctaOnClick = (e) => {
     setCtaClickStatus(!ctaClickStatus);
@@ -33,10 +42,14 @@ function App(){
           <OnboardingContainer ctaClickStatus={ ctaClickStatus } />
         </div>
       }
+
+
       
     </div>
   
 );
 }
 
-export default App;
+
+export default connect(mapStateToProps, null)(App);
+

@@ -9,11 +9,18 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+const mapStateToProps = (state) => {
+  return { 
+    dashboardModalStatus: state.dashboardModalStatus,
+  };
+};
+
 class ConnectedCompanyForm extends Component {
   constructor() {
     super();
     this.state = {
       companyName: "",
+      dashboardModalStatus: true,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,10 +31,9 @@ class ConnectedCompanyForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.createCompany(this.state.companyName);
-    this.props.dashboardModalToggle();
+    this.props.dashboardModalToggle(this.state.dashboardModalToggle);
   }
   render() {
-    console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -45,5 +51,5 @@ class ConnectedCompanyForm extends Component {
     );
   }
 }
-const CompanyForm = connect(null, mapDispatchToProps)(ConnectedCompanyForm);
+const CompanyForm = connect(mapStateToProps, mapDispatchToProps)(ConnectedCompanyForm);
 export default CompanyForm;

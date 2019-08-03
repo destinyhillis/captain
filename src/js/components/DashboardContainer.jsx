@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ShareholderForm from './ShareholderForm';
 import {  } from '../actions/actions';
 
 
 const mapStateToProps = (state) => {
   return { 
     companyName: state.companyName,
+    shareholderFormModalToggle: state.shareholderFormModalToggle,
   };
 };
 
@@ -27,18 +29,19 @@ class DashboardContainer extends Component {
     console.log(e.target.value, 'hit function in container')
   }
 
-    componentDidMount(){
-    }
-
     render(){
-      console.log(this.props)
       return (
         <div>
           <p>
           Captain by Admiral
           </p>
               <h1>{ this.props.companyName }</h1>
-              <button type="button" onClick={this.handleSubmit}>click this button</button>
+              {
+                this.props.shareholderFormModalToggle ?
+                  <ShareholderForm />
+                :
+                null
+              }
         </div>
       );
     }
