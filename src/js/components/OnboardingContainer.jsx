@@ -18,21 +18,16 @@ class OnboardingContainer extends Component {
     constructor(){
         super();
         this.state = {
-            dashboardModalStatus: "",
+            // dashboardModalStatus: this.props.dashboardModalStatus
         }
-    }
-    componentDidMount(){
-        this.checkDashboardModal()
-    }
-    checkDashboardModal = () => {
-        console.log(this.state, this.props, 'dashboard check')
     }
 
     render(){
+        console.log(this.props.dashboardModalStatus)
         return (
             <div className="onboarding">
-            {/* {
-              dashboardModalStatus ? */}
+            {
+              !this.props.dashboardModalStatus ?
               <div>
                 <p>
                 Captain by Admiral
