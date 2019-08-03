@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 import OnboardingContainer from "./OnboardingContainer";
-import DashboardContainer from "./DashboardContainer";
 
 
 const mapStateToProps = (state) => {

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { shareholderFormToggle } from "../actions/actions";
+import { shareholderFormToggle, createShareholder } from "../actions/actions";
 
 function mapDispatchToProps(dispatch) {
   return {
     shareholderFormToggle: status => dispatch(shareholderFormToggle(status)),
+    createShareholder: data => dispatch(createShareholder(data)),
   };
 }
 
@@ -12,17 +13,22 @@ class ConnectedShareholderForm extends Component {
   constructor() {
     super();
     this.state = {
+      shareholderName: "",
+      type: "",
+      stock: "",
+      perShare: "",
+      date: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(e) {
+    console.log(e.target.value, 'shareholder form')
     this.setState({ [e.target.id]: e.target.value });
   }
   handleSubmit(event) {
     event.preventDefault();
-    // this.props.createCompany(this.state.companyName);
-    this.props.shareholderFormToggle();
+    this.props.createShareholder(this.state);
   }
   render() {
     console.log(this.state)
@@ -36,10 +42,10 @@ class ConnectedShareholderForm extends Component {
             onChange={ this.handleChange }
           />
           <h3>Shareholder type:</h3>
-            <select>
-              <option value="investor">Investor</option>
-              <option value="founder">Founder</option>
-              <option value="employee">Employee</option>
+            <select onChange={ this.handleChange } id="type">
+              <option id="type" value="investor">Investor</option>
+              <option id="type" value="founder">Founder</option>
+              <option id="type" value="employee">Employee</option>
             </select>
           <h3>Amount of Stock Owned</h3>
             <input
@@ -61,8 +67,9 @@ class ConnectedShareholderForm extends Component {
             />
         </div>
         <button type="submit">
-          Sign Up
+          Add Shareholder
         </button>
+        <button onClick={ this.props.shareholderFormToggle }>Done</button>
       </form>
     );
   }
