@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ShareholderForm from './ShareholderForm';
 import {  } from '../actions/actions';
+import CapTable from './CapTable';
 
 
 const mapStateToProps = (state) => {
@@ -11,24 +12,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return { 
-
-  };
-};
   
 class DashboardContainer extends Component {
-  constructor() {
-    super();
-    this.state = {
-    //   companyName: this.props.companyName
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleSubmit(e) {
-    console.log(e.target.value, 'hit function in container')
-  }
-
     render(){
       return (
         <div>
@@ -42,10 +27,11 @@ class DashboardContainer extends Component {
                 :
                 null
               }
+              <CapTable />
         </div>
       );
     }
 
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
+export default connect(mapStateToProps, null)(DashboardContainer);

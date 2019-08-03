@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { shareholderFormToggle, createShareholder } from "../actions/actions";
 
 function mapDispatchToProps(dispatch) {
@@ -17,19 +19,31 @@ class ConnectedShareholderForm extends Component {
       type: "",
       stock: "",
       perShare: "",
-      date: ""
+      date: "",
+      startDate: new Date()
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(e) {
-    console.log(e.target.value, 'shareholder form')
-    this.setState({ [e.target.id]: e.target.value });
-  }
-  handleSubmit(event) {
-    event.preventDefault();
+    this.setState({ 
+      [e.target.id]: e.target.value,
+     });
+  };
+
+  // GET DATE SELECTION TO WORK
+  handleDateChange(e){
+    console.log(e, "hit")
+    this.setState({
+      startDate: e
+    })
+  };
+
+  handleSubmit(e) {
+    e.preventDefault();
     this.props.createShareholder(this.state);
-  }
+  };
+
   render() {
     console.log(this.state)
     return (
@@ -60,16 +74,16 @@ class ConnectedShareholderForm extends Component {
               onChange={ this.handleChange }
             />
           <h3>Date Given:</h3>
-            <input
-              type="text"
+            <DatePicker
+              selected={ this.state.startDate }
+              onChange={ this.handleDateChange }
               id="date"
-              onChange={ this.handleChange }
             />
         </div>
         <button type="submit">
           Add Shareholder
         </button>
-        <button onClick={ this.props.shareholderFormToggle }>Done</button>
+        <button type="reset" onClick={ this.props.shareholderFormToggle }>X</button>
       </form>
     );
   }
