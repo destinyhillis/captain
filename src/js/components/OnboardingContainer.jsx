@@ -23,7 +23,6 @@ class OnboardingContainer extends Component {
     }
 
     render(){
-        console.log(this.props.dashboardModalStatus)
         return (
             <div className="onboarding">
             {

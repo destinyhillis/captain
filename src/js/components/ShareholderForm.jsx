@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import DatePicker from "react-datepicker";
+import { parseISO } from 'date-fns';
 import "react-datepicker/dist/react-datepicker.css";
 import { shareholderFormToggle, createShareholder } from "../actions/actions";
 
@@ -19,24 +20,26 @@ class ConnectedShareholderForm extends Component {
       type: "",
       stock: "",
       perShare: "",
-      date: "",
+      // date: new Date(),
       startDate: new Date()
+
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
   handleChange(e) {
+    console.log(e.target.id, 'id', e, 'e')
     this.setState({ 
       [e.target.id]: e.target.value,
-     });
+      });
   };
 
   // GET DATE SELECTION TO WORK
-  handleDateChange(e){
-    console.log(e, "hit")
+  handleDateChange(date){
     this.setState({
-      startDate: e
-    })
+      startDate: date
+    });
   };
 
   handleSubmit(e) {
@@ -73,12 +76,13 @@ class ConnectedShareholderForm extends Component {
               id="perShare"
               onChange={ this.handleChange }
             />
-          <h3>Date Given:</h3>
-            <DatePicker
-              selected={ this.state.startDate }
-              onChange={ this.handleDateChange }
-              id="date"
-            />
+
+            <h3>Date Given:</h3>
+              <DatePicker
+                selected={this.state.startDate}
+                onChange={this.handleDateChange}
+              />
+
         </div>
         <button type="submit">
           Add Shareholder
